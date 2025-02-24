@@ -200,14 +200,15 @@ public class VineryForgeConfig {
         }
     }
 
-    public static void loadConfig(ForgeConfigSpec s, String p) {
-        CommentedFileConfig f = CommentedFileConfig.builder(new File(p))
+    public static void loadConfig(ForgeConfigSpec spec, String path) {
+        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path))
                 .sync()
                 .preserveInsertionOrder()
                 .autosave()
                 .writingMode(WritingMode.REPLACE)
                 .build();
-        f.load();
-        s.setConfig(f);
+        file.load();
+        spec.setConfig(file);
+        file.save();
     }
 }

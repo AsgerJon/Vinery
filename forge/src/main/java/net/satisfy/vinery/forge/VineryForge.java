@@ -1,5 +1,6 @@
 package net.satisfy.vinery.forge;
 
+import dev.architectury.platform.Platform;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +23,7 @@ public class VineryForge {
         PlatformHelperImpl.ENTITY_TYPES.register(modEventBus);
         PreInit.preInit();
         Vinery.init();
-        VineryForgeConfig.loadConfig(VineryForgeConfig.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("vinery.toml").toString());
+        VineryForgeConfig.loadConfig(VineryForgeConfig.COMMON_CONFIG, Platform.getConfigFolder().resolve("vinery.toml").toString());
         VineryForgeVillagers.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
