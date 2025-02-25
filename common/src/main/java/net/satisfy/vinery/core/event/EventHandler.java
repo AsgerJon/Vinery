@@ -7,6 +7,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.item.ItemStack;
@@ -42,12 +43,17 @@ public class EventHandler {
                 fireworkRocket.setAirSupply(0);
                 level.addFreshEntity(fireworkRocket);
 
+                if (!(target instanceof Player || target instanceof Mob)) {
+                    return EventResult.interruptTrue();
+                }
+
                 return EventResult.pass();
             }
         }
 
         return EventResult.pass();
     }
+
 
     public static void register() {
         PlayerEvent.ATTACK_ENTITY.register(EventHandler::onAttack);
