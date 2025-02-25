@@ -7,7 +7,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class CreeperEffect extends InstantenousMobEffect {
@@ -32,8 +31,8 @@ public class CreeperEffect extends InstantenousMobEffect {
             double y = serverPlayer.getY();
             double z = serverPlayer.getZ();
             world.explode(null, x, y, z, (float) (amplifier), Level.ExplosionInteraction.TNT);
-            serverPlayer.setDeltaMovement(Vec3.ZERO);
-            serverPlayer.setHealth(0.0F);
+
+            serverPlayer.hurt(serverPlayer.level().damageSources().explosion(null), 50.0F);
         }
     }
 }
