@@ -1,5 +1,6 @@
 package net.satisfy.vinery.core.effect;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

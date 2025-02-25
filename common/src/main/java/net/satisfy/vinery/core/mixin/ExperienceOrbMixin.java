@@ -13,16 +13,17 @@ import java.util.Objects;
 @Mixin(ExperienceOrb.class)
 public abstract class ExperienceOrbMixin {
 
-    @Inject(method = "playerTouch", at = @At("TAIL"))
+    @Inject(method = "playerTouch", at = @At("HEAD"))
     public void onPlayerTouch(Player player, CallbackInfo ci) {
         if (player.hasEffect(MobEffectRegistry.EXPERIENCE_EFFECT.get())) {
             int amplifier = Objects.requireNonNull(player.getEffect(MobEffectRegistry.EXPERIENCE_EFFECT.get())).amplifier;
+
+            int multiplier = amplifier + 1;
             ExperienceOrb self = (ExperienceOrb) (Object) this;
+            int bonusXp = (int) (self.getValue() * multiplier * 0.25);
 
-            int originalXp = self.getValue();
-
-            int bonusXp = (int) (originalXp * amplifier * 0.5);
             player.giveExperiencePoints(bonusXp);
         }
     }
 }
+
